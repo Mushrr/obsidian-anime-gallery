@@ -4,6 +4,10 @@
 - maybe easy to use
 
 # usage
+* unzip all files to `obsidian/plugins`
+* open obsidian and enable this plugin
+* open command panel type `anime gallery`
+* input tags, ( must be seperated by comma
 
 ![](screenshots/usg.gif)
 
