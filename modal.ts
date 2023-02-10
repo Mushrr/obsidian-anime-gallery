@@ -1,13 +1,16 @@
 // Modal
 import { App, debounce, Modal, MarkdownView, Notice } from 'obsidian'
-import cgControl from 'cgurls';
+import cgControl from './cgurls';
+import AnimeGalleryPlugin from './main';
 
 export class AnimeGalleryModal extends Modal {
 	// tags
 	tags: string;
+	plugin: AnimeGalleryPlugin
 
-	constructor(app: App) {
+	constructor(app: App, plugin: AnimeGalleryPlugin) {
 		super(app);
+		this.plugin = plugin;
 	}
 
 	onOpen() {
@@ -20,9 +23,9 @@ export class AnimeGalleryModal extends Modal {
 		div.classList.add("cg-img-container")
 		const search = debounce(() => {
 			new Notice("Ciallo～(∠·ω< )⌒: start searching~");
-			const tags = cgControl["anime-pictures"].metaData.tags || [];
-			const page = cgControl["anime-pictures"].metaData.page || 0;
-			cgControl["anime-pictures"].searchHandler(tags, page).then(res => {
+			const tags = cgControl[this.plugin.settings.source].metaData.tags || [];
+			const page = cgControl[this.plugin.settings.source].metaData.page || 0;
+			cgControl[this.plugin.settings.source].searchHandler(tags, page, this.plugin.settings.safeMode).then(res => {
 				div.empty();
 				if (res.length === 0) {
 					new Notice("Ciallo～(∠·ω< )⌒: not found~");
@@ -68,7 +71,12 @@ export class AnimeGalleryModal extends Modal {
 				this.tags = ""
 			}
 			const tags = this.tags.split(",").map((tag) => tag.trim())
-			cgControl["anime-pictures"].metaData.tags = tags;
+			if (this.plugin.settings.source) {
+				cgControl[this.plugin.settings.source].metaData.tags = tags;
+			} else {
+				this.plugin.settings.source = "anime-picture"
+				cgControl[this.plugin.settings.source].metaData.tags = tags;
+			}
 			search();
 		}
 

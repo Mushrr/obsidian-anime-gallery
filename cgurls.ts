@@ -17,7 +17,7 @@ interface imageItem {
 	width: number
 }
 
-type searchHandler = (tags: string[], page: number) => Promise<imageItem[]>
+type searchHandler = (tags: string[], page: number, ...args: any) => Promise<imageItem[]>
 type selectHandler = (url: string) => {}
 
 interface CG {
@@ -94,8 +94,53 @@ const animePictureCG: CG = {
 	}
 }
 
+
+const konachanCG: CG = {
+	metaData: {
+		name: "Konachan",
+		url: "https://konachan.com/post",
+		previewUrl: "https://konachan.com/data/preview",
+		downloadUrl: "https://konachan.com/sample",
+		safeUrl: "https://konachan.net/post",
+		currentData: {},
+		tags: [],
+		parseRegex: /Post\.register\((.*)\)/g
+	},
+
+	async searchHandler(tags: string[], page: number = 1, safeMode: "on" | "off" = "on") {
+		
+		
+		let fetchUrl = `${this.metaData.url}?page=${page}&tags=${tags.join(',')}`;
+		if (safeMode === 'on') {
+			fetchUrl = `${this.metaData.safeUrl}?page=${page}&tags=${tags.join(',')}`
+		}
+		console.log(safeMode);
+		console.log(fetchUrl);
+		const response = await requestUrl({
+			url: fetchUrl,
+			method: 'GET',
+		})
+		const allImagUrls = response.text.matchAll(this.metaData.parseRegex);
+		const urls: JSON[] = [];
+		for (const u of allImagUrls) {
+			urls.push(JSON.parse(u[1]));
+		}
+		const result = urls.map((item: any) => {
+			return {
+				src: `${item.preview_url}`,
+				downloadSrc: `${item.sample_url}`,
+				id: item.id,
+				height: item.height,
+				width: item.width
+			}
+		})
+		return result;
+	}
+}
+
 const cgControl: CgControl = {
-	"anime-pictures": animePictureCG
+	"anime-picture": animePictureCG,
+	"konachan": konachanCG
 }
 
 export default cgControl;
