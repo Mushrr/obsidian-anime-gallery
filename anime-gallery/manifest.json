@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-anime-gallery",
 	"name": "Anime Gallery",
-	"version": "0.1.0",
+	"version": "0.0.2",
 	"minAppVersion": "0.0.1",
 	"description": "a plugin that can help you directly search some anime pictures from cg websites;",
 	"author": "Mushr",
