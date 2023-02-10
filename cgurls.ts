@@ -14,7 +14,8 @@ interface imageItem {
 	downloadSrc: string,
 	id: number,
 	height: number,
-	width: number
+	width: number,
+	tags: string[],
 }
 
 type searchHandler = (tags: string[], page: number, ...args: any) => Promise<imageItem[]>
@@ -70,6 +71,7 @@ const animePictureCG: CG = {
 			order_by: "date",
 			ldate: 0
 		}
+		console.log(queryParam);
 		const nestedUrl = this.metaData.url + "?lang=en&search_tag=" + tags.join(",") + 
 						'&' + urlSearchParamSerialize(queryParam);
 		console.log(nestedUrl);
@@ -85,11 +87,11 @@ const animePictureCG: CG = {
 					downloadSrc: this.metaData.downloadUrl + item.md5.slice(0, 3) + `/${item.md5}${item.ext}`,
 					id: item.id,
 					height: item.height,
-					width: item.width
+					width: item.width,
 				}
 			})
 		}
-		console.log(result);
+		console.log(response);
 		return result
 	}
 }
@@ -114,7 +116,6 @@ const konachanCG: CG = {
 		if (safeMode === 'on') {
 			fetchUrl = `${this.metaData.safeUrl}?page=${page}&tags=${tags.join(',')}`
 		}
-		console.log(safeMode);
 		console.log(fetchUrl);
 		const response = await requestUrl({
 			url: fetchUrl,
@@ -131,7 +132,8 @@ const konachanCG: CG = {
 				downloadSrc: `${item.sample_url}`,
 				id: item.id,
 				height: item.height,
-				width: item.width
+				width: item.width,
+				tags: item.tags.split(" ")
 			}
 		})
 		return result;

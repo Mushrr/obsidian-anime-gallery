@@ -34,13 +34,12 @@ If your plugin does not need CSS, delete this file.
 
 
 .cg-img {
-	width: 49%;
-	float: left;
+	width: 70%;
 	height: auto;
 	object-fit: cover;
 	margin-top: 1rem;
 	margin-right: 1rem;
-	transition: all 0.5s ease;
+	transition: all 0.5s ease-in-out;
 }
 
 .cg-img:nth-child(odd) {
@@ -56,6 +55,13 @@ If your plugin does not need CSS, delete this file.
 		22.3px 22.3px 17.9px rgba(0, 0, 0, 0.028),
 		41.8px 41.8px 33.4px rgba(0, 0, 0, 0.044),
 		100px 100px 80px rgba(0, 0, 0, 0.07);
+	width: 80%;
+	transition: all 0.5s ease-in-out;
+}
+
+.next_btn {
+	display: block;
+	width: 70%;
 }
 
 .loading-image {
@@ -65,4 +71,29 @@ If your plugin does not need CSS, delete this file.
 
 .loading-image.loaded {
 	opacity: 1;
+}
+
+.cg-img-size-tag {
+	padding: 0.5rem;
+	font: normal normal 1rem/1rem "得意黑";
+	color: rgba(0, 0, 0, 0.5);
+	border-radius: 0.5rem;
+	background-color: rgba(207, 255, 152, 0.5);
+	border: 1px solid rgba(122, 205, 71, 0.7);
+}
+
+.describe-tags {
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.cg-img-tag-tag {
+	padding: 0.5rem;
+	font: normal normal 1rem/1rem "得意黑";
+	color: #fff;
+	border-radius: 0.5rem;
+	background-color: rgba(0, 0, 0, 0.5);
 }

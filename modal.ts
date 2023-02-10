@@ -14,6 +14,8 @@ export class AnimeGalleryModal extends Modal {
 	}
 
 	onOpen() {
+		let isSearch = true;
+
 		let { contentEl } = this;
 		const inputArea = contentEl.createEl('input', {
 			placeholder: "please input some tags: blue_eyes,empty_background"
@@ -21,19 +23,22 @@ export class AnimeGalleryModal extends Modal {
 		inputArea.classList.add("input-area")
 		const div = contentEl.createEl('div')
 		div.classList.add("cg-img-container")
+		div.empty();
 		const search = debounce(() => {
 			new Notice("Ciallo～(∠·ω< )⌒: start searching~");
+			if (isSearch) {
+				div.empty();
+			}
 			const tags = cgControl[this.plugin.settings.source].metaData.tags || [];
 			const page = cgControl[this.plugin.settings.source].metaData.page || 0;
 			cgControl[this.plugin.settings.source].searchHandler(tags, page, this.plugin.settings.safeMode).then(res => {
-				div.empty();
 				if (res.length === 0) {
 					new Notice("Ciallo～(∠·ω< )⌒: not found~");
 					return;
 				}
 
 				new Notice("Ciallo～(∠·ω< )⌒: I Get!")
-				res.forEach((item) => {
+				res.forEach((item, ind) => {
 					const img = div.createEl('img', {
 						attr: {
 							src: item.src as string,
@@ -60,7 +65,44 @@ export class AnimeGalleryModal extends Modal {
 						}
 						this.close();
 					}
+
+					const describeDiv = div.createEl('div', {
+						attr: {
+							class: "describe-tags"
+						}
+					})
+					describeDiv.createEl('span', {
+						text: `${item.width}x${item.height}`,
+						attr: {
+							class: 'cg-img-size-tag'
+						}
+					})
+					if (item.tags) {
+						describeDiv.createEl('span', {
+							text: `${item.tags.slice(0, 5).join(',')}`,
+							attr: {
+								class: 'cg-img-tag-tag'
+							}
+						})
+					}
 				})
+				const button = div.createEl('button', {
+					text: "Next Page"
+				});
+
+				button.classList.add('next_btn');
+
+				button.onclick = () => {
+					if (cgControl[this.plugin.settings.source].metaData.page) {
+						cgControl[this.plugin.settings.source].metaData.page +=1;
+					} else {
+						cgControl[this.plugin.settings.source].metaData.page = 2;
+					}
+					isSearch = false;
+					search();
+					new Notice("Ciallo～(∠·ω< )⌒: next page~");
+					button.parentElement?.removeChild(button);
+				}
 			})
 		}, 1000, true);
 
@@ -77,13 +119,20 @@ export class AnimeGalleryModal extends Modal {
 				this.plugin.settings.source = "anime-picture"
 				cgControl[this.plugin.settings.source].metaData.tags = tags;
 			}
+			isSearch = true;
 			search();
 		}
 
+		div.onscroll = (ev: Event) => {
+			console.log("Event");
+		}
 	}
 
 	onClose() {
 		let { contentEl } = this;
 		contentEl.empty()
+		for (const source of Object.keys(cgControl)) {
+			cgControl[source].metaData.page = 0;
+		}
 	}
 }
