@@ -17,4 +17,5 @@ Thanks for [Anime-Picture](https://anime-pictures.net/)'s Picture and resources.
 # Future
 - [ ] More CG resources
 - [ ] Tag AutoComplete
-- [ ] Picture Tag Info
+- [X] Picture Tag Info
+- [X] Auto copy to clipboard

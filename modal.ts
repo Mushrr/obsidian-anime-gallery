@@ -55,13 +55,14 @@ export class AnimeGalleryModal extends Modal {
 					img.onload = () => {
 						img.classList.add("loaded");
 					}
-					img.onclick = () => {
+					img.onclick = async () => {
 						// 获取downloadSrc 下的文件复制到剪切板
 						const downloadURL = item.downloadSrc
 						// 以插入图片的形式写入obsidian
 						const editor = this.app.workspace.getActiveViewOfType(MarkdownView)?.editor;
 						if (editor) {
 							editor.replaceSelection(`![](${downloadURL})`);
+							await this.plugin.clipboard.writeText(downloadURL); // 写入剪切板
 						}
 						this.close();
 					}

@@ -12,9 +12,11 @@ const DEFAULT_SETTINGS: AnimeGallerySettings = {
 
 export default class MyPlugin extends Plugin {
 	settings: AnimeGallerySettings;
+	clipboard: Clipboard
 
 	async onload() {
 		await this.loadSettings();
+		this.clipboard = navigator.clipboard;
 		this.addCommand({
 			id: "anime-gallery",
 			name: "Anime Gallery",

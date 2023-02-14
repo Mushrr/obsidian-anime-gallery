@@ -112,9 +112,9 @@ const konachanCG: CG = {
 	async searchHandler(tags: string[], page: number = 1, safeMode: "on" | "off" = "on") {
 		
 		
-		let fetchUrl = `${this.metaData.url}?page=${page}&tags=${tags.join(',')}`;
+		let fetchUrl = `${this.metaData.url}?page=${page}&tags=${tags.join('+')}`;
 		if (safeMode === 'on') {
-			fetchUrl = `${this.metaData.safeUrl}?page=${page}&tags=${tags.join(',')}`
+			fetchUrl = `${this.metaData.safeUrl}?page=${page}&tags=${tags.join('+')}`
 		}
 		console.log(fetchUrl);
 		const response = await requestUrl({
