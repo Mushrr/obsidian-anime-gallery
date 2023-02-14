@@ -36,7 +36,6 @@ export class AnimeGalleryModal extends Modal {
 					new Notice("Ciallo～(∠·ω< )⌒: not found~");
 					return;
 				}
-
 				new Notice("Ciallo～(∠·ω< )⌒: I Get!")
 				res.forEach((item, ind) => {
 					const img = div.createEl('img', {

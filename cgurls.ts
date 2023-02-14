@@ -1,6 +1,6 @@
 import { URL } from "url"
 import { urlSearchParamSerialize } from "utils"
-import { requestUrl } from 'obsidian'
+import { Notice, requestUrl } from 'obsidian'
 
 interface CGMetadata {
 	name: string,
@@ -79,6 +79,10 @@ const animePictureCG: CG = {
 		const response = await requestUrl({
 			url: nestedUrl,
 		})
+		if (response.status >= 300 && response.status < 600) {
+			new Notice("Ciallo～(∠·ω< )⌒: Network error, try again later");
+			return [];
+		}
 		this.metaData.currentData = response;
 		if (Array.isArray(response.json.posts)) {
 			result = response.json.posts.map((item: cgItem) => {
@@ -121,6 +125,12 @@ const konachanCG: CG = {
 			url: fetchUrl,
 			method: 'GET',
 		})
+
+		// error fetch
+		if (response.status >= 300 && response.status < 600) {
+			new Notice("Ciallo～(∠·ω< )⌒: Network error, try again later");
+			return [];
+		}
 		const allImagUrls = response.text.matchAll(this.metaData.parseRegex);
 		const urls: JSON[] = [];
 		for (const u of allImagUrls) {
