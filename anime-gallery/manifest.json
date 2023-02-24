@@ -1,11 +1,11 @@
 {
-	"id": "obsidian-anime-gallery",
+	"id": "anime-gallery",
 	"name": "Anime Gallery",
 	"version": "0.1.3",
 	"minAppVersion": "0.0.1",
 	"description": "a plugin that can help you directly search some anime pictures from cg websites;",
 	"author": "Mushr",
-	"authorUrl": "https://github.com/Mushrr",
+	"authorUrl": "https://github.com/Mushrr/obsidian-anime-gallery",
 	"fundingUrl": "https://afdian.net/a/mushr",
 	"isDesktopOnly": false
 }
