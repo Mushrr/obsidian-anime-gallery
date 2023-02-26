@@ -1,21 +1,17 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/node': ^16.11.6
+  '@types/node': ^16.18.12
   '@typescript-eslint/eslint-plugin': 5.29.0
   '@typescript-eslint/parser': 5.29.0
   builtin-modules: 3.3.0
   esbuild: 0.17.3
-  loadsh: ^0.0.4
   obsidian: latest
   tslib: 2.4.0
   typescript: 4.7.4
 
-dependencies:
-  loadsh: 0.0.4
-
 devDependencies:
-  '@types/node': 16.18.11
+  '@types/node': 16.18.12
   '@typescript-eslint/eslint-plugin': 5.29.0_treee22277sh3yq6pnqeflwlmi
   '@typescript-eslint/parser': 5.29.0_typescript@4.7.4
   builtin-modules: 3.3.0
@@ -259,8 +255,8 @@ packages:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
 
-  /@types/node/16.18.11:
-    resolution: {integrity: sha512-3oJbGBUWuS6ahSnEq1eN2XrCyf4YsWI8OyCvo7c64zQJNplk3mO84t53o8lfTk+2ji59g5ycfc6qQ3fdHliHuA==}
+  /@types/node/16.18.12:
+    resolution: {integrity: sha512-vzLe5NaNMjIE3mcddFVGlAXN1LEWueUsMsOJWaT6wWMJGyljHAWHznqfnKUQWGzu7TLPrGvWdNAsvQYW+C0xtw==}
     dev: true
 
   /@types/tern/0.23.4:
@@ -569,11 +565,6 @@ packages:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
     dev: true
-
-  /loadsh/0.0.4:
-    resolution: {integrity: sha512-U+wLL8InpfRalWrr+0SuhWgGt10M4OyAk6G8xCYo2rwpiHtxZkWiFpjei0vO463ghW8LPCdhqQxXlMy2qicAEw==}
-    deprecated: This is a typosquat on the popular Lodash package. This is not maintained nor is the original Lodash package.
-    dev: false
 
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}

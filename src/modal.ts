@@ -122,10 +122,6 @@ export class AnimeGalleryModal extends Modal {
 			isSearch = true;
 			search();
 		}
-
-		div.onscroll = (ev: Event) => {
-			console.log("Event");
-		}
 	}
 
 	onClose() {

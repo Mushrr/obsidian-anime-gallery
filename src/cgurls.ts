@@ -1,5 +1,5 @@
 import { URL } from "url"
-import { urlSearchParamSerialize } from "utils"
+import { urlSearchParamSerialize } from "src/utils"
 import { Notice, requestUrl } from 'obsidian'
 
 interface CGMetadata {
@@ -65,16 +65,13 @@ const animePictureCG: CG = {
 		tags: []
 	},
 	async searchHandler(tags: string[], page: number = 0) {
-		console.log("开始搜索!");
 		const queryParam = {
 			page: page,
 			order_by: "date",
 			ldate: 0
 		}
-		console.log(queryParam);
 		const nestedUrl = this.metaData.url + "?lang=en&search_tag=" + tags.join(",") + 
 						'&' + urlSearchParamSerialize(queryParam);
-		console.log(nestedUrl);
 		let result: imageItem[] = []
 		const response = await requestUrl({
 			url: nestedUrl,
@@ -95,7 +92,6 @@ const animePictureCG: CG = {
 				}
 			})
 		}
-		console.log(response);
 		return result
 	}
 }
@@ -120,7 +116,6 @@ const konachanCG: CG = {
 		if (safeMode === 'on') {
 			fetchUrl = `${this.metaData.safeUrl}?page=${page}&tags=${tags.join('+')}`
 		}
-		console.log(fetchUrl);
 		const response = await requestUrl({
 			url: fetchUrl,
 			method: 'GET',

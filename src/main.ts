@@ -10,7 +10,7 @@ const DEFAULT_SETTINGS: AnimeGallerySettings = {
 	safeMode: "on"
 }
 
-export default class MyPlugin extends Plugin {
+export default class AnimeGalleryPlugin extends Plugin {
 	settings: AnimeGallerySettings;
 	clipboard: Clipboard
 
@@ -18,8 +18,8 @@ export default class MyPlugin extends Plugin {
 		await this.loadSettings();
 		this.clipboard = navigator.clipboard;
 		this.addCommand({
-			id: "anime-gallery",
-			name: "Anime Gallery",
+			id: "open-anime-gallery",
+			name: "Open anime gallery",
 			callback: () => {
 				new AnimeGalleryModal(this.app, this).open();
 			}
